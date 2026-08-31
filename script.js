@@ -78,6 +78,19 @@
     }
   });
 
+  // Cookie banner
+  try {
+    const cookieBanner = document.getElementById('cookieBanner');
+    const cookieAccept = document.getElementById('cookieAccept');
+    if (cookieBanner && !localStorage.getItem('cookieConsent')) {
+      setTimeout(() => cookieBanner.classList.add('is-visible'), 600);
+    }
+    cookieAccept?.addEventListener('click', () => {
+      try { localStorage.setItem('cookieConsent', '1'); } catch (e) {}
+      cookieBanner.classList.remove('is-visible');
+    });
+  } catch (e) {}
+
   // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
@@ -93,7 +106,7 @@
 
   // Reveal on scroll
   const targets = document.querySelectorAll(
-    '.adv, .srv, .step, .object, .review, .contact-card, .faq__item, .form, .hero__card, .principle, .service, .audience__card'
+    '.adv, .srv, .step, .object, .review, .contact-card, .faq__item, .form, .hero__card, .principle, .service, .audience__card, .quote-block'
   );
   targets.forEach(el => el.classList.add('reveal'));
   const io = new IntersectionObserver(entries => {
