@@ -91,7 +91,7 @@
     });
   } catch (e) {}
 
-  // Smooth scroll
+  // Smooth scroll (scroll-margin-top in CSS handles the header offset)
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const href = a.getAttribute('href');
@@ -99,8 +99,7 @@
       const target = document.querySelector(href);
       if (!target) return;
       e.preventDefault();
-      const top = target.getBoundingClientRect().top + window.scrollY - 72;
-      window.scrollTo({ top, behavior: 'smooth' });
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 
